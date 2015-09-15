@@ -70,7 +70,7 @@ shell.password("Type a secret password:", function (password) {
 Let's try something more complicated:
 
 ```javascript
-shell = require('minish');
+var shell = require('minish');
 
 // 'hello' command
 shell.command("hello", function (context) {
@@ -143,3 +143,4 @@ shell.write("Type 'help' to see a list of available commands.");
 shell.prompt("> ");
 ```
 
+Check out [minish TypeScript typings](https://github.com/lukaaash/minish/raw/master/typings/minish/minish.d.ts) for a quick overview of the rest of available API.

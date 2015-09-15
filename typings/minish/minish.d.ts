@@ -1,4 +1,4 @@
-﻿// Type definitions for minish 0.3.0
+﻿// Type definitions for minish 0.5.0
 // Project: https://github.com/lukaaash/minish
 // Definitions by: Lukas Pokorny <https://github.com/lukaaash>
 
