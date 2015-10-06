@@ -433,7 +433,7 @@ class MiniShell extends MiniConsole {
                 action.call(null, new CommandContext(this, cmd, args, options));
             } catch (err) {
                 //TODO: add a configurable event handler
-                super.write(err.message);
+                super.write("Error:", err.message);
                 this._next();
             }
         } else if (cmd == "help") {
