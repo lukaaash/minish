@@ -346,6 +346,7 @@ class CommandContext {
 class MiniShell extends MiniConsole {
     private _commands: {};
     private _prompt: string;
+    private _arglerOptions: {};
 
     constructor(input?: NodeJS.ReadableStream, output?: NodeJS.WritableStream) {
         super(input, output);
@@ -386,7 +387,14 @@ class MiniShell extends MiniConsole {
     }
 
     // sets the prompt and starts prompting for a command
-    prompt(prompt?: string): void {
+    prompt(prompt?: string, options?: { ignoreBackslash?: boolean }): void {
+        options = options || {};
+
+        this._arglerOptions = {
+            ignoreBackslash: options.ignoreBackslash,
+        };
+
+        this._command
         this._prompt = "" + (prompt || "> ");
         this._next();
     }
@@ -399,7 +407,7 @@ class MiniShell extends MiniConsole {
     // runs the specified command line
     private _command(line: string): void {
         // parse line into command and arguments using argler
-        var args = argler(line);
+        var args = argler(line, this._arglerOptions);
         var cmd = args.shift();
         this._execute(cmd, args);
     }

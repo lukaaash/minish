@@ -37,7 +37,7 @@ declare module "minish" {
             write(message?: any, ...optionalParams: any[]): void;
 
             // sets the prompt and starts prompting for a command
-            prompt(prompt?: string): void;
+            prompt(prompt?: string, options?: { ignoreBackslash?: boolean }): void;
 
             // declare a command (or multiple commands) with an optional help and action
             command(command: string | string[], action?: (info: ICommandContext) => void): IMiniShell;
