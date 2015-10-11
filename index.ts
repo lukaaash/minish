@@ -226,9 +226,11 @@ class MiniConsole {
         
         // custom keypress handler
         function keypress(s, key): void {
-            if (key.ctrl) {
-                if (!key.shift) {
-                    switch (key.name) {
+            var name;
+            if (typeof key !== "undefined") {
+                name = key.name;
+                if (key.ctrl && !key.shift) {
+                    switch (name) {
                         case 'c': // Ctrl+C (EOT)
                             finish();
                             return;
@@ -244,32 +246,32 @@ class MiniConsole {
                             return;
                     }
                 }
+
+                if (key.meta || key.ctrl) return;
             }
 
-            if (!key.meta && !key.ctrl) {
-                switch (key.name) {
-                    case 'return': // CR
-                    case 'enter': // LF
-                        finish();
-                        output.write("\r\n");
-                        callback(password);
-                        break;
-                    case 'backspace':
-                        if (password.length > 0) {
-                            password = password.substring(0, password.length - 1);
-                            if (!silent) output.write("\u0008 \u0008");
+            switch (name) {
+                case 'return': // CR
+                case 'enter': // LF
+                    finish();
+                    output.write("\r\n");
+                    callback(password);
+                    break;
+                case 'backspace':
+                    if (password.length > 0) {
+                        password = password.substring(0, password.length - 1);
+                        if (!silent) output.write("\u0008 \u0008");
+                    }
+                    break;
+                default:
+                    if (typeof s === "string") {
+                        var c = s[0];
+                        if (c.charCodeAt(0) >= 0x20) {
+                            if (!silent) output.write('*');
+                            password += c;
                         }
-                        break;
-                    default:
-                        if (typeof s === "string") {
-                            var c = s[0];
-                            if (c.charCodeAt(0) >= 0x20) {
-                                if (!silent) output.write('*');
-                                password += c;
-                            }
-                        }
-                        break;
-                }
+                    }
+                    break;
             }
         }
     }
