@@ -1,10 +1,13 @@
-﻿// Type definitions for minish 0.5.0
+﻿// Type definitions for minish 0.5.4
 // Project: https://github.com/lukaaash/minish
 // Definitions by: Lukas Pokorny <https://github.com/lukaaash>
 
 /// <reference path="../node/node.d.ts" />
+/// <reference path="../minimist/minimist.d.ts" />
 
 declare module "minish" {
+
+    import minimist = require("minimist");
 
     // additional functions exported by default shell
     interface minish extends minish.IMiniShell {
@@ -14,6 +17,9 @@ declare module "minish" {
 
         // exits the whole process with an optional exit code
         exit(code?: number): void;
+
+        // parse arguments with minimist
+        parse(args?: string[], opts?: minimist.Opts): minimist.ParsedArgs;
     }
 
     module minish {

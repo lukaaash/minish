@@ -500,6 +500,7 @@ function exit(code ?: number): void {
 
 // create an instance of IMiniShell and export it
 var minish = <minish>new MiniShell();
+(<any>minish).parse = minimist;
 (<any>minish).create = create;
 (<any>minish).exit = exit;
 export = minish;
